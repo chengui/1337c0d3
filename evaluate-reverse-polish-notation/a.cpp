@@ -11,9 +11,8 @@ public:
         stack<int> calc;
         int a = 0, b = 0, c = 0;
         for (int i = 0; i < tokens.size(); i++) {
-            if (isdigit(tokens[i][0])) {
-                calc.push(atoi(tokens[i].c_str()));
-            } else {
+            if (tokens[i] == "+" || tokens[i] == "-" || \
+                tokens[i] == "*" || tokens[i] == "/") {
                 if (!calc.empty()) {
                     a = calc.top();
                     calc.pop();
@@ -32,6 +31,8 @@ public:
                     c = b / a;
                 //else exception skipped
                 calc.push(c);
+            } else {
+                calc.push(atoi(tokens[i].c_str()));
             }
         }
 
@@ -43,7 +44,7 @@ public:
 };
 
 int main() {
-    char *repr[] = {"2", "1", "+", "3", "*"};
+    char *repr[] = {"4","-2","/","2","-3","-","-"};
     vector<string> tokens;
     tokens.assign(repr, repr + sizeof(repr)/sizeof(char*));
     Solution solu = Solution();
