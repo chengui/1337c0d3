@@ -1,6 +1,16 @@
 from __future__ import print_function
 
 class Solution(object):
+    """
+    Intersection presents value in both list A and list B, so filter
+    out all values both in list A and B by using 'filter', then unique
+    the results with hash dict.
+      >>> filter(lambda k: k in nums1 and k in nums2, nums1+nums2)
+
+    To save more time, use the short list (S) as iterator, the long
+    list (L) as hash checking.
+      >>> filter(lambda k: k in L, S)
+    """
     def intersection(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -11,7 +21,11 @@ class Solution(object):
             if k not in dct:
                 dct[k] = 1
             return dct
-        res1 = filter(lambda k: k in nums1 and k in nums2, nums1+nums2)
+        if len(nums1) < len(nums2):
+            S, L = nums1, nums2
+        else:
+            S, L = nums2, nums1
+        res1 = filter(lambda k: k in L, S)
         res2 = reduce(unique, res1, {})
         return res2.keys()
 
