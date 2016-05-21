@@ -24,14 +24,6 @@ from __future__ import print_function
 #        :rtype List[NestedInteger]
 #        """
 
-def flat(flatList, nestedList):
-    for i in nestedList:
-        if isinstance(i, list):
-            flatList = flat(flatList, i)
-        else:
-            flatList.append(i)
-    return flatList
-
 class NestedIterator(object):
 
     def __init__(self, nestedList):
@@ -41,7 +33,7 @@ class NestedIterator(object):
         """
         self.__pointer = 0
         self.__flat = []
-        flat(self.__flat, nestedList)
+        self.flat(nestedList)
 
     def flat(self, nestedList):
         """
