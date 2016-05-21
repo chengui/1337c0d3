@@ -37,7 +37,14 @@ class NestedInteger(object):
         return self.__value
 
 class NestedIterator(object):
-
+    """
+    There is a trick in python, when a function has a list parameter, this parameter will
+    act as a reference, which means you to change its value will change the original list.
+      >>> l = [1, 2, 3]
+      >>> (lambda x: x.append(len(x)))(l)
+      >>> print(l)
+      [1, 2, 3, 3]
+    """
     def __init__(self, nestedList):
         """
         Initialize your data structure here.
