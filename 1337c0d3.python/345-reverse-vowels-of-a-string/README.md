@@ -1,7 +1,6 @@
 345. Reverse Vowels of a String
 ===============================
 
-> Total Accepted: 14912 Total Submissions: 42134 Difficulty: Easy
 > Write a function that takes a string as input and reverse only the vowels of a string.
 > 
 > Example 1:
