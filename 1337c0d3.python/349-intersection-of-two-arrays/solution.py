@@ -14,8 +14,8 @@ class Solution(object):
     In some scenes, there are many duplicated values in the lists, so
     it should unique them first to reduce the amount of values, which
     saves more time for intersection.
-      >>> reduce(unique, nums1, {})
-      >>> reduce(unique, nums2, {})
+      >>> reduce(lambda d, k: k in d and d or d.update({k:1}) or d, nums1, {})
+      >>> reduce(lambda d, k: k in d and d or d.update({k:1}) or d, nums2, {})
     """
     def intersection(self, nums1, nums2):
         """
@@ -23,10 +23,7 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-        def unique(dct, k):
-            if k not in dct:
-                dct[k] = 1
-            return dct
+        unique = lambda d, k: k in d and d or d.update({k: 1}) or d
         nums1 = reduce(unique, nums1, {})
         nums2 = reduce(unique, nums2, {})
         if len(nums1) < len(nums2):
