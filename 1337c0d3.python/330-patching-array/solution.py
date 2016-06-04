@@ -15,13 +15,14 @@ class Solution(object):
         patches = []
         bpow, mxrange = 0, 0
         nums.append(n)
-        for num in nums:
-            while mxrange < num:
-                if 2**bpow not in nums[:-1]: patches.append(bpow)
-                bpow, mxrange = bpow + 1, 2**(1+bpow) - 1
-            mxrange += num
-            if mxrange >= n: break
-        print(patches)
+        while mxrange < n:
+            if 2**bpow not in nums:
+                patches.append(2**bpow)
+            else:
+                nums.remove(2**bpow)
+            bpow, mxrange = bpow + 1, 2**(1+bpow) - 1
+        mxrange += num
+        if mxrange >= n: break
         return len(patches)
        
 if __name__ == "__main__":
