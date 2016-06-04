@@ -12,25 +12,23 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        marked = dict()
+        patches = []
+        bpow, mxrange = 0, 0
+        nums.append(n)
         for num in nums:
-            for i in marked.keys():
-                if num+i not in marked: marked[num+i] = True
-            if num not in marked: marked[num] = True
-        npatch = 0
-        for num in range(1, n+1):
-            if len(marked) == n: break
-            if num not in marked:
-                npatch += 1
-                for i in marked.keys():
-                    if num+i not in marked: marked[num+i] = True
-                if num not in marked: marked[num] = True
-        return npatch
-        
+            while mxrange < num:
+                if 2**bpow not in nums[:-1]: patches.append(bpow)
+                bpow, mxrange = bpow + 1, 2**(1+bpow) - 1
+            mxrange += num
+            if mxrange >= n: break
+        print(patches)
+        return len(patches)
+       
 if __name__ == "__main__":
     # nums, n = [1, 3], 6
     # nums, n = [1, 2, 2], 5
     # nums, n = [1, 5, 10], 20
+    # nums, n = [], 8
     nums, n = [1, 2, 31, 33], 2147483647
     s = Solution()
     print(s.minPatches(nums, n))
