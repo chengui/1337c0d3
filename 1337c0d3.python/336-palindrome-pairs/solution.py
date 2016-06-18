@@ -6,23 +6,27 @@ class Solution(object):
         :type words: List[str]
         :rtype: List[List[int]]
         """
-        reverse = lambda w: ''.join(reversed(w))
-        res, dict_words = list(), dict([(words[i], i) for i in range(len(words))])
+        def isPalindrome(str):
+            if len(str) <= 1: return True
+            return 0 == cmp(str, str[::-1])
+
+        dict_words = dict([(words[i], i) for i in range(len(words))])
+        res, flag = list(), "" in dict_words
         for i in xrange(len(words)):
-            if words[i] == "": continue
-            rword = reverse(words[i])
-            if words[i] != rword:
-                if rword in dict_words:
-                    res.append([i, dict_words[rword]])
-            elif "" in dict_words:
-                res.append([i, dict_words[""]])
-                res.append([dict_words[""], i])
+            if len(words[i]) == 0: continue
+            if isPalindrome(words[i]):
+                if "" in dict_words:
+                    res.append([i, dict_words[""]])
+                    res.append([dict_words[""], i])
+            else:
+                rword = words[i][::-1]
+                if rword in dict_words: res.append([i, dict_words[rword]])
             for j in xrange(1, len(words[i])):
                 substr1, substr2 = words[i][:j], words[i][j:]
-                rsubstr1, rsubstr2 = reverse(substr1), reverse(substr2)
-                if substr1 == rsubstr1 and rsubstr2 in dict_words:
+                rsubstr1, rsubstr2 = substr1[::-1], substr2[::-1]
+                if isPalindrome(substr1) and rsubstr2 in dict_words:
                     res.append([dict_words[rsubstr2], i])
-                if substr2 == rsubstr2 and rsubstr1 in dict_words:
+                if isPalindrome(substr2) and rsubstr1 in dict_words:
                     res.append([i, dict_words[rsubstr1]])
         return res
 
