@@ -6,14 +6,20 @@ class Solution(object):
         :type words: List[str]
         :rtype: List[List[int]]
         """
+        def reversedstr(word):
+            return ''.join(reversed(word))
         def isPalindrome(word):
             return word == ''.join(reversed(word))
         res = []
         for i in xrange(len(words)):
-            for j in xrange(len(words)):
-                if i == j: continue
-                if isPalindrome(words[i] + words[j]):
-                    res.append([i, j])
+            for j in xrange(len(words[i])):
+                substr1, substr2 = words[i][:j], words[i][j:]
+                if isPalindrome(substr1) and reversedstr(substr2) in words:
+                    k = words.index(reversedstr(substr2))
+                    if k != i: res.append([k, i])
+                if isPalindrome(substr2) and reversedstr(substr1) in words:
+                    k = words.index(reversedstr(substr1))
+                    if k != i: res.append([i, k])
         return res
 
 if __name__ == "__main__":
