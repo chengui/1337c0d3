@@ -7,18 +7,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        nhash, mhash = dict(), dict()
+        nhash = dict()
         for i, v in enumerate(nums):
-            if v not in nhash:
-                nhash[v] = i
-            else:
-                mhash[v] = i
-        for num in nums:
-            if (target - num) in nhash:
-                if num != (target - num):
-                    return [nhash[num], nhash[target-num]]
-                elif num in mhash:
-                    return [nhash[num], mhash[num]]
+            n = target - v
+            if n in nhash:
+                return [nhash[n], i]
+            nhash[v] = i
         return []
 
 if __name__ == "__main__":
