@@ -8,16 +8,18 @@ class Solution(object):
         """
         import bisect
         def dfs_visit(G, u, visited, vpath):
-            if u not in G:
-                print(">>> ", visited, vpath)
-                return
-            visited[u] = True
-            vpath.append(u)
             for v in G[u]:
-                if v not in visited:
+                if len(visited) == len(G):
+                    break
+                elif v not in visited:
+                    visited[v] = True
+                    vpath.append(v)
                     dfs_visit(G, v, visited, vpath)
+                    if len(visited) == len(G): break
+                    vpath.pop()
+                    visited.pop(v)
             return vpath
-        tomap, graph = dict(), dict()
+        tomap, graph, visit, vpath = dict(), dict(), dict(), list()
         for n, t in enumerate(tickets):
             if t[0] not in tomap: tomap[t[0]] = []
             bisect.insort(tomap[t[0]], (t[1], n))
@@ -26,11 +28,10 @@ class Solution(object):
                 graph[n] = []
             else:
                 graph[n] = map(lambda x: x[1], tomap[t[1]])
-        for to, i in tomap['JFK']:
-            visit, vpath = dict(), list()
-            dfs_visit(graph, i, visit, vpath)
-            if len(vpath) == len(tickets):
-               return ['JFK'] + map(lambda x: tickets[x][1], vpath)
+        n = len(graph)
+        graph[n] = map(lambda x: x[1], tomap['JFK'])
+        visit[n] = True
+        dfs_visit(graph, n, visit, vpath)
         return ['JFK'] + map(lambda x: tickets[x][1], vpath)
 
 if __name__ == "__main__":
