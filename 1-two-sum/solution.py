@@ -9,7 +9,6 @@ class Solution(object):
         """
         d = dict()
         for i, v in enumerate(nums):
-            n = target - v
             if target - v in d:
                 return [d[target-v], i]
             d[v] = i
