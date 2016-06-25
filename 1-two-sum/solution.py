@@ -7,13 +7,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        nhash = dict()
+        d = dict()
         for i, v in enumerate(nums):
             n = target - v
-            if n in nhash:
-                return [nhash[n], i]
-            nhash[v] = i
-        return []
+            if target - v in d:
+                return [d[target-v], i]
+            d[v] = i
 
 if __name__ == "__main__":
     target, nums = 6, [3, 2, 4]
