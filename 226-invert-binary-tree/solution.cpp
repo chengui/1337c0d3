@@ -1,6 +1,10 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 
 using namespace std;
+
+#define SSTR(x) static_cast<std::ostringstream &>((std::ostringstream() << std::dec << x)).str()
 
 /**
  * Definition for a binary tree node.
@@ -24,13 +28,14 @@ public:
     }
 };
 
-void print(TreeNode* root)
+string str(TreeNode* root)
 {
     if (root == NULL)
-        return;
-    print(root->left);
-    cout<< ' '<<root->val<<' ';
-    print(root->right);
+        return "";
+    string left = str(root->left);
+    string val = SSTR(root->val);
+    string right = str(root->right);
+    return left + " " + val + " " + right;
 }
 
 int main()
@@ -38,9 +43,7 @@ int main()
     TreeNode *root = NULL;
     TreeNode a(4), b(2), c(7), d(1), e(3), f(6), g(9);
     root = &a, a.left = &b, a.right = &c, b.left = &d, b.right = &e, c.left = &f, c.right = &g;
-    print(root);
-    cout << endl;
+    cout << str(root) << endl;
     Solution s = Solution();
-    print(s.invertTree(root));
-    cout << endl;
+    cout << str(s.invertTree(root)) << endl;
 }
