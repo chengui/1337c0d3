@@ -5,24 +5,15 @@ using namespace std;
 class Solution {
 public:
     int addDigits(int num) {
-        int sum = 0;
-        do
-        {
-            sum = 0;
-            while (num > 0)
-            {
-                sum += num % 10;
-                num = num / 10;
-            }
-            num = sum;
-        } while (sum >= 10);
-        return sum;
+        if (num == 0)
+            return 0;
+        return !(num%9) ? 9: (num%9);
     }
 };
 
 int main()
 {
-    int num = 128;
+    int num = 279;
     Solution s = Solution();
     cout << s.addDigits(num) << endl;
 }
