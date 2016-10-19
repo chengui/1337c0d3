@@ -7,24 +7,18 @@ using namespace std;
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        map<char, int> dict1, dict2;
+        int count1[26] = {0}, count2[26] = {0};
         for (size_t i = 0; i < ransomNote.length(); i++)
         {
-            if (dict1.count(ransomNote[i]))
-                dict1[ransomNote[i]] ++;
-            else
-                dict1[ransomNote[i]] = 0;
+            count1[ransomNote[i] - 'a']++;
         }
         for (size_t i = 0; i < magazine.length(); i++)
         {
-            if (dict2.count(magazine[i]))
-                dict2[magazine[i]] ++;
-            else
-                dict2[magazine[i]] = 0;
+            count2[magazine[i] - 'a']++;
         }
-        for (map<char, int>::iterator it = dict1.begin(); it != dict1.end(); it++)
+        for (size_t i = 0; i < 26; i++)
         {
-            if (!dict2.count(it->first) || dict2[it->first] < it->second)
+            if (count1[i] > count2[i])
                 return false;
         }
         return true;
