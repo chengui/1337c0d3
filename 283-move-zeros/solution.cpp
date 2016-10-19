@@ -10,19 +10,28 @@ using namespace std;
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        size_t i = 0, j = nums.size();
-        while (i < j)
+        size_t i = 0, j = 0;
+        while (i < nums.size() && j < nums.size())
         {
-            if (nums[i] == 0)
+            if (nums[j] == 0)
             {
-                nums.push_back(nums[i]);
-                nums.erase(nums.begin() + i);
-                j--;
+                j++;
+                continue;
             }
-            else
+            if (nums[i] != 0)
             {
                 i++;
+                continue;
             }
+            if (i >= j)
+            {
+                j++;
+                continue;
+            }
+            nums[i] = nums[j];
+            nums[j] = 0;
+            i++;
+            j++;
         }
     }
 };
@@ -41,8 +50,9 @@ string str(vector<int>& nums)
 int main()
 {
     // int tmp[] = {0};
-    // int tmp[] = {1, 0, 2, 0, 10};
-    int tmp[] = {4, 2, 4, 0, 0, 3, 0, 5, 1, 0};
+    // int tmp[] = {0, 1, 2, 0, 13};
+    int tmp[] = {1, 0, 2, 0, 10};
+    // int tmp[] = {4, 2, 4, 0, 0, 3, 0, 5, 1, 0};
     vector<int> nums(tmp, tmp + sizeof(tmp) / sizeof(tmp[0]));
     Solution s = Solution();
     cout << str(nums) << endl;
