@@ -7,26 +7,30 @@ using namespace std;
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        size_t n = nums.size();
-        map<int, size_t> cnt;
-        for (size_t i = 0; i < n; i++)
+        int maj = 0, cnt = 1;
+        for (size_t i = 1; i < nums.size(); i++)
         {
-            if (!cnt.count(nums[i]))
-                cnt[nums[i]] = 1;
+            if (nums[i] == nums[maj])
+                cnt++;
             else
-                cnt[nums[i]]++;
+                cnt--;
 
-            if (cnt[nums[i]] > n / 2)
-                return nums[i];
+            if (cnt == 0)
+            {
+                maj = i;
+                cnt = 1;
+            }
         }
-        return 0;
+        return nums[maj];
     }
 };
 
 int main()
 {
-    // int tmp[] = {1, 2, 3, 1, 3, 1};
-    int tmp[] = {6, 5, 5};
+    // int tmp[] = {1, 2, 1, 2, 1, 2, 1};
+    // int tmp[] = {6, 6, 5, 5, 5};
+    // int tmp[] = {3, 3, 4};
+    int tmp[] = {3, 2, 3};
     vector<int> nums(tmp, tmp + sizeof(tmp)/sizeof(int));
     Solution s = Solution();
     cout << s.majorityElement(nums) << endl;
