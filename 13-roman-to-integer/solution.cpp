@@ -1,23 +1,38 @@
 #include <iostream>
 #include <string>
-#include <map>
 
 using namespace std;
 
 class Solution {
-    public:
-    int romanToInt(string s) {
-        int sum = 0;
-        size_t len = s.length();
-        map<char, int> dict;
-        dict['I'] = 1, dict['V'] = 5, dict['X'] = 10, dict['L'] = 50;
-        dict['C'] = 100, dict['D'] = 500, dict['M'] = 1000;
-        for (size_t i = 0; i < len; i++)
+public:
+    int romanCharToInt(char c)
+    {
+        switch (c)
         {
-            if ((i == len - 1) || dict[s[i]] >= dict[s[i+1]])
-                sum += dict[s[i]];
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+        }
+        return 0;
+    }
+
+    int romanToInt(string s) {
+
+        int top = 0, sum = 0;
+        int len = s.length();
+
+        for (int i = len-1; i >= 0; i--)
+        {
+            int num = romanCharToInt(s[i]);
+            if (num < top)
+                sum -= num;
             else
-                sum -= dict[s[i]];
+                sum += num;
+            top = num;
         }
         return sum;
     }
@@ -25,7 +40,7 @@ class Solution {
 
 int main()
 {
-    string str = "IL";
+    string str = "MCMLXX";
     Solution s = Solution();
     cout << s.romanToInt(str) << endl;
 }
