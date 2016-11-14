@@ -5,9 +5,13 @@ using namespace std;
 class Solution {
 public:
     int climbStairs(int n) {
-        if (n == 1) return 1;
-        if (n == 2) return 2;
-        return climbStairs(n-1) + climbStairs(n-2);
+        int a = 0, b = 1, t = 0;
+        for (int i = 0; i < n; i++) {
+            t = b;
+            b =  a + b;
+            a = t;
+        }
+        return b;
     }
 };
 
