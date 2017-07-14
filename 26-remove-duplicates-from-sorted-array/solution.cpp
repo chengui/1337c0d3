@@ -5,25 +5,17 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(int A[], int n) {
+        int i = 0;
+        int j = 1;
         if (n <= 0) return 0;
-        if (n == 1) return 1;
-
-        int begin = 0;
-        int pointer = 0;
-        while (pointer < n) {
-            int pp = 0, ppp = 0;
-            for (pp = pointer + 1; pp < n && A[pp] == A[pointer]; pp++);
-            ppp = pp;
-            for (int j = pointer; j >= begin; j--, pp--)
-                A[pp - 1] = A[j];
-            begin = pp;
-            pointer = ppp;
-
+        while (j < n) {
+            if (A[j] != A[i]) {
+                i++;
+                A[i] = A[j];
+            }
+            j++;
         }
-
-        for (int i = begin; i < n; i++)
-            A[i - begin] = A[i];
-        return (n - begin);
+        return (i+1);
     }
 };
 
