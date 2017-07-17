@@ -1,5 +1,4 @@
-String to Integer (atoi)
-========================
+## 8. String to Integer (atoi)
 
 Implement atoi to convert a string to an integer.
 
@@ -10,6 +9,7 @@ Notes: It is intended for this problem to be specified vaguely (ie, no given inp
 spoilers alert... click to show requirements for atoi.
 
 Requirements for atoi:
+
 The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
 
 The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
