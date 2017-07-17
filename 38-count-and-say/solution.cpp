@@ -4,31 +4,33 @@
 
 using namespace std;
 
-using namespace std;
-
 class Solution {
 public:
     string countAndSay(int n) {
-        if (n == 1)
-        return "1";
-        if (n == 2)
-        return "11";
-        int cnt = 1;
-        int i = 0;
-        stringstream rs;
-        string st = countAndSay(n - 1);
-        for(i = 1; i < st.length(); i++) {
-        if (st[i] == st[i - 1]) {
-            cnt++;
-        } else {
-            rs << cnt;
-            rs << st[i-1];
-            cnt = 1;
-        }
-        }
-        rs << cnt;
-        rs << st[i-1];
-        return rs.str();
+            string res;
+            string tmp;
+            if (n == 0) return res;
+            res = "1";
+            while (n > 1) {
+                int size = res.length();
+                int idx = 0;
+                tmp.clear();
+                while (idx < size){
+                    char c = res[idx];
+                    int end = res.find_first_not_of(&c, idx);
+                    if (end == string::npos){
+                        end = size;
+                    }
+                    tmp += std::to_string(end - idx);
+                    tmp += res[idx];
+                    idx = end;
+                }
+                res.clear();
+                res.assign(tmp);
+                n--;
+//                cout <<res<<endl;
+            }
+            return res;
     }
 };
 
