@@ -1,5 +1,4 @@
-34. Search for a Range
-======================
+## 34. Search for a Range
 
 Given an array of integers sorted in ascending order, find the starting and ending position of a given target value.
 
