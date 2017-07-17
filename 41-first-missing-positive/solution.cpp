@@ -6,17 +6,21 @@ using namespace std;
 class Solution {
 public:
     int firstMissingPositive(int A[], int n) {
-        vector<int> tmp(n, 0);
+        int idx = 0, tmp = 0;
         for (int i = 0; i < n; i++) {
             if (A[i] <= 0)
                 continue;
             if (A[i] > n)
                 continue;
-            tmp.at(A[i]-1) = 1;
+            idx = A[i]- 1;
+            tmp = A[idx];
+            A[i] = tmp;
+            A[idx] = (idx+1);
+            if (tmp != A[idx])
+                i--;
         }
         for (int i = 0; i < n; i++) {
-            //cout << i<<":"<<tmp[i] <<endl;
-            if (tmp[i] == 0)
+            if (A[i] != (i+1))
                 return (i+1);
         }
         return (n+1);
