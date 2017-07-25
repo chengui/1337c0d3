@@ -5,9 +5,10 @@ using namespace std;
 class Solution {
 public:
     int trailingZeroes(int n) {
-        int pow = 0;
-        int i = 5;
-        int m = 0;
+        // use long long to avoid overflow
+        long long pow = 0;
+        long long i = 5;
+        long long m = 0;
         do {
             pow += (m = n / i);
             i *= 5;
